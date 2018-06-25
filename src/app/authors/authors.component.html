@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-lg-2">
+      <form (ngSubmit)="storeAuthor()" #authorForm="ngForm" *ngIf="role == 1">
+          <div class="form-group">
+              <label for="name">Name</label>
+              <input [(ngModel)]="author.name" type="text" class="form-control" name="name" id="name" #name="ngModel" required>
+              <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                  Name is required
+              </div>
+          </div>
+          <button type="submit" class="btn btn-success" [disabled]="!authorForm.form.valid">Add</button>   
+      </form>
+  </div>
+  <div class="col-lg-8">
+
+        <ul>
+          <li *ngFor="let author of allauthors" (click)="selectAuthor(author)">
+            {{author.name}} <button class="btn btn-danger" (click)="deleteAuthor(author)" *ngIf="role == 1">Delete</button>
+            <ul>
+              <li *ngFor="let book of author.books">{{book.name}} | </li>
+            </ul>
+          </li>
+        </ul>
+  </div>
+  <div class="col-lg-2">
+      <form (ngSubmit)="updateAuthor()" #updateForm="ngForm" *ngIf="role == 1">
+          <div class="form-group">
+              <label for="name">Name</label>
+              <input [(ngModel)]="updateauthor.name" type="text" class="form-control" name="name" id="name" #name="ngModel" required>
+              <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                  Name is required
+              </div>
+          </div>
+          <button type="submit" class="btn btn-success" [disabled]="!updateForm.form.valid">Update</button>   
+      </form>
+  </div>
+
+</div>
+  
+  
+  

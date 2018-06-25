@@ -1,0 +1,18 @@
+<p>
+  {{user}}
+</p>
+<div class="row">
+    
+    <br>
+    <div class="col-lg-8">
+        <ul>
+            <li *ngFor="let book of allbooks" >
+                {{book.name}} | {{book.author.name}} | {{book.genre.name}} | {{book.shelf.name}} | 
+                <button class="btn btn-primary" (click)="returnBook(book)" >Return</button>
+            </li>
+            
+          </ul>
+          
+    </div>
+    
+</div>

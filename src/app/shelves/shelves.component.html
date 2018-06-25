@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-lg-2">
+        <form (ngSubmit)="storeShelve()" #shelveForm="ngForm" *ngIf="role == 1">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input [(ngModel)]="shelve.name" type="text" class="form-control" name="name" id="name" #name="ngModel" required>
+                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                    Name is required
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!shelveForm.form.valid">Add</button>   
+        </form>
+    </div>
+    <div class="col-lg-8">  
+          <ul>
+            <li *ngFor="let shelve of allshelves" (click)="selectShelve(shelve)">
+              {{shelve.name}} <button class="btn btn-danger" (click)="deleteShelve(shelve)" *ngIf="role == 1">Delete</button>
+              <ul>
+                <li *ngFor="let book of shelve.books">{{book.name}} | </li>
+              </ul>
+            </li>
+          </ul>
+    </div>
+    <div class="col-lg-2">
+        <form (ngSubmit)="updateShelve()" #updateForm="ngForm" *ngIf="role == 1">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input [(ngModel)]="updateshelve.name" type="text" class="form-control" name="name" id="name" #name="ngModel" required>
+                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                    Name is required
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!updateForm.form.valid">Update</button>   
+        </form>
+    </div>
+  </div>
+    
+    
+    
+<!-- <accordion>
+
+    
+    <accordion-group *ngFor="let shelve of allshelves" heading="{{shelve.name}}">
+      <ul>
+        <li *ngFor="let book of shelve.books">
+          {{book.name}}
+        </li>
+      </ul>
+    </accordion-group>
+    <br>
+  </accordion> -->
+
+
+  

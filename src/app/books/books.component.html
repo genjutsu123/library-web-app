@@ -1,0 +1,97 @@
+<div class="row">
+    
+    <br>
+    <div class="col-lg-2">
+        <form (ngSubmit)="storeBook()" #bookForm="ngForm" *ngIf="role == 1">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input [(ngModel)]="book.name" type="text" class="form-control" name="name" id="name" #name="ngModel" required>
+                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                    Name is required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="author">Author</label>
+                <select [(ngModel)]="book.author_id" class="form-control" name="author" id="author" #author="ngModel" required>
+                        <option *ngFor="let author of allauthors" [value]="author.id">{{author.name}}</option>
+                </select>
+                <div [hidden]="author.valid || author.pristine" class="alert alert-danger">
+                    Author is required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre</label>
+                <select [(ngModel)]="book.genre_id" class="form-control" name="genre" id="genre" #genre="ngModel" required>
+                        <option *ngFor="let genre of allgenres" [value]="genre.id">{{genre.name}}</option>
+                </select>
+                <div [hidden]="genre.valid || genre.pristine" class="alert alert-danger">
+                    Genre is required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="genre">Shelf</label>
+                <select [(ngModel)]="book.shelf_id" class="form-control" name="shelve" id="shelve" #shelve="ngModel" required>
+                        <option *ngFor="let shelve of allshelves" [value]="shelve.id">{{shelve.name}}</option>
+                </select>
+                <div [hidden]="shelve.valid || shelve.pristine" class="alert alert-danger">
+                    Shelf is required
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid">Add</button>   
+        </form>
+        
+        
+    </div>
+    <div class="col-lg-8">
+        <ul>
+            <li *ngFor="let book of allbooks" >
+                {{book.name}} | {{book.author.name}} | {{book.genre.name}} | {{book.shelf.name}} | 
+                <button class="btn btn-default" (click)="selectBook(book)" *ngIf="role == 1">Select</button> |
+                <button class="btn btn-danger" (click)="deleteBook(book)" *ngIf="role == 1">Delete</button>
+                <button class="btn btn-primary" (click)="borrowBook(book)" *ngIf="role == 2">Borrow</button>
+            </li>
+            
+        </ul>
+          
+    </div>
+    <div class="col-lg-2">
+        <form (ngSubmit)="updateBook()" #updateForm="ngForm" *ngIf="role == 1">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input [(ngModel)]="selectedbook.name" type="text" class="form-control" name="name" id="name" #name="ngModel" required>
+                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                    Name is required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="author">Author</label>
+                <select [(ngModel)]="selectedbook.author_id" class="form-control" name="author" id="author" #author="ngModel" required>
+                        <option *ngFor="let author of allauthors" [value]="author.id">{{author.name}}</option>
+                </select>
+                <div [hidden]="author.valid || author.pristine" class="alert alert-danger">
+                    Author is required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre</label>
+                <select [(ngModel)]="selectedbook.genre_id" class="form-control" name="genre" id="genre" #genre="ngModel" required>
+                        <option *ngFor="let genre of allgenres" [value]="genre.id">{{genre.name}}</option>
+                </select>
+                <div [hidden]="genre.valid || genre.pristine" class="alert alert-danger">
+                    Genre is required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="genre">Shelf</label>
+                <select [(ngModel)]="selectedbook.shelf_id" class="form-control" name="shelve" id="shelve" #shelve="ngModel" required>
+                        <option *ngFor="let shelve of allshelves" [value]="shelve.id">{{shelve.name}}</option>
+                </select>
+                <div [hidden]="shelve.valid || shelve.pristine" class="alert alert-danger">
+                    Shelf is required
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!updateForm.form.valid">Update</button>   
+        </form>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-lg-2">
+        <form (ngSubmit)="storeGenre()" #genreForm="ngForm" *ngIf="role == 1">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input [(ngModel)]="genre.name" type="text" class="form-control" name="name" id="name" #name="ngModel" required>
+                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                    Name is required
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!genreForm.form.valid">Add</button>   
+        </form>
+    </div>
+    <div class="col-lg-8">
+  
+          <ul>
+            <li *ngFor="let genre of allgenres" (click)="selectGenre(genre)">
+              {{genre.name}} <button class="btn btn-danger" (click)="deleteGenre(genre)" *ngIf="role == 1">Delete</button>
+              <ul>
+                <li *ngFor="let book of genre.books">{{book.name}} | </li>
+              </ul>
+            </li>
+          </ul>
+    </div>
+    <div class="col-lg-2">
+        <form (ngSubmit)="updateGenre()" #updateForm="ngForm" *ngIf="role == 1">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input [(ngModel)]="updategenre.name" type="text" class="form-control" name="name" id="name" #name="ngModel" required>
+                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                    Name is required
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!updateForm.form.valid">Update</button>   
+        </form>
+    </div>
+  </div>
+    
+    
+    
+
+
+<!-- <accordion>
+  
+  <accordion-group *ngFor="let genre of allgenres" heading="{{genre.name}}">
+    <ul>
+      <li *ngFor="let book of genre.books">
+        {{book.name}}
+      </li>
+    </ul>
+  </accordion-group>
+  <br>
+</accordion> -->
+
+

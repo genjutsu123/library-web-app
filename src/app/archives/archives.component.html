@@ -1,0 +1,90 @@
+
+<div class="row">
+    
+    <br>
+    <div class="col-lg-8">
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Books
+                    </button>
+                </h5>
+                </div>
+            
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    <ul>
+                        <li *ngFor="let book of allbooks" >
+                            {{book.name}} | {{book.author.name}} | {{book.genre.name}} | {{book.shelf.name}} | 
+                            <button class="btn btn-primary" (click)="restoreBook(book)" *ngIf="role == 1">Restore</button>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Genres
+                    </button>
+                </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                    <ul>
+                        <li *ngFor="let genre of allgenres" >
+                            {{genre.name}}  
+                            <button class="btn btn-primary" (click)="restoreGenre(genre)" *ngIf="role == 1">Restore</button>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Authors
+                    </button>
+                </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                    <ul>
+                        <li *ngFor="let author of allauthors" >
+                            {{author.name}}  
+                            <button class="btn btn-primary" (click)="restoreAuthor(author)" *ngIf="role == 1">Restore</button>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingFour">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                        Shelves
+                    </button>
+                </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                <div class="card-body">
+                    <ul>
+                        <li *ngFor="let shelve of allshelves" >
+                            {{shelve.name}}  
+                            <button class="btn btn-primary" (click)="restoreShelve(shelve)" *ngIf="role == 1">Restore</button>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

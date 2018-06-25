@@ -1,0 +1,50 @@
+
+        <form (ngSubmit)="onSignup()" #userForm="ngForm">
+        
+          <div class="form-group row">
+            <label for="name" class="col-md-4 control-label">Name</label>
+        
+            <div class="col-md-6">
+
+              <input id="name" type="text" class="form-control" name="name" [(ngModel)]="user.name" #name="ngModel" required>
+              <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                  Name is required
+              </div>
+            </div>
+          </div>
+        
+          <div class="form-group row">
+            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+        
+            <div class="col-md-6">
+
+              <input id="email" type="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name="email" [(ngModel)]="user.email" #email="ngModel" [email]="true" required>
+              <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+                  E-Mail is required
+              </div>
+            </div>
+          </div>
+        
+          <div class="form-group row">
+            <label for="password" class="col-md-4 control-label">Password</label>
+        
+            <div class="col-md-6">
+
+              <input id="password" type="password" class="form-control" name="password" [(ngModel)]="user.password" #password="ngModel" required>
+              <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+                  Password is required
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-group row mb-0">
+            <div class="col-md-6 col-md-offset-4">
+              <button type="submit" class="btn btn-primary" [disabled]="!userForm.form.valid">
+                <i class="fa fa-btn fa-user"></i> Register
+              </button>
+            </div>
+          </div>
+        </form>
+
+ 
