@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
@@ -8,32 +8,37 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+
   loggedIn;
   role;
   navigationSubscription;
-  constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) {
-    this.navigationSubscription = this.router.events.subscribe((e: any) => {
 
-      if (e instanceof NavigationEnd) {
-        this.initialiseInvites();
-      }
+  constructor(private authService: AuthService,
+     private route: ActivatedRoute,
+      private router: Router, 
+      private cdRef: ChangeDetectorRef) {
+        this.navigationSubscription = this.router.events.subscribe((e: any) => {
+          if (e instanceof NavigationEnd) {
+            this.initialiseInvites();
+          }
     });
   }
 
   ngOnInit() {
     
   }
+
   initialiseInvites() {
     this.loggedIn = this.authService.isLoggedIn();
     this.role = this.authService.role();
   }
-  ngOnDestroy() {
 
+  ngOnDestroy() {
     if (this.navigationSubscription) {  
-       this.navigationSubscription.unsubscribe();
+      this.cdRef.detach();
+      this.navigationSubscription.unsubscribe();
     }
   }
-  
 }
 
 

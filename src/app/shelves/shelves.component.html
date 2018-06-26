@@ -1,54 +1,65 @@
 <div class="row">
-    <div class="col-lg-2">
-        <form (ngSubmit)="storeShelve()" #shelveForm="ngForm" *ngIf="role == 1">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input [(ngModel)]="shelve.name" type="text" class="form-control" name="name" id="name" #name="ngModel" required>
-                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-                    Name is required
+    <div class="col-lg-10">
+        <h3>SHELVES<button type="button" class="btn btn-primary" (click)="openModal(create)" *ngIf="role == 1"><i class="fas fa-plus"></i></button></h3>
+        <table class="table table-responsive-sm" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Books</th>
+                    <th *ngIf="role == 1">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let shelve of allshelves" >
+                    <td>{{shelve.name}}</td>
+                    <td><span *ngFor="let book of shelve.books">{{book.name}}, </span></td>
+                    <td *ngIf="role == 1">
+                        <button class="btn btn-success" (click)="selectShelve(shelve)" (click)="openModal(update)"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger" (click)="deleteShelve(shelve)" [disabled]="!continue"><i class="far fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <ng-template #create>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">ADD SHELVE</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form (ngSubmit)="storeShelve()" #shelveForm="ngForm" *ngIf="role == 1">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input [(ngModel)]="shelve.name" type="text" class="form-control" name="name" id="name" #name="ngModel" required>
+                    <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                        Name is required
+                    </div>
                 </div>
-            </div>
-            <button type="submit" class="btn btn-success" [disabled]="!shelveForm.form.valid">Add</button>   
-        </form>
-    </div>
-    <div class="col-lg-8">  
-          <ul>
-            <li *ngFor="let shelve of allshelves" (click)="selectShelve(shelve)">
-              {{shelve.name}} <button class="btn btn-danger" (click)="deleteShelve(shelve)" *ngIf="role == 1">Delete</button>
-              <ul>
-                <li *ngFor="let book of shelve.books">{{book.name}} | </li>
-              </ul>
-            </li>
-          </ul>
-    </div>
-    <div class="col-lg-2">
-        <form (ngSubmit)="updateShelve()" #updateForm="ngForm" *ngIf="role == 1">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input [(ngModel)]="updateshelve.name" type="text" class="form-control" name="name" id="name" #name="ngModel" required>
-                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-                    Name is required
+                <button type="submit" class="btn btn-success" [disabled]="!shelveForm.form.valid && !continue">Add</button>
+            </form>
+        </div>
+    </ng-template>
+    <ng-template #update>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">UPDATE SHELVE</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form (ngSubmit)="updateShelve()" #updateForm="ngForm" *ngIf="role == 1">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input [(ngModel)]="updateshelve.name" type="text" class="form-control" name="name" id="name" #name="ngModel" required>
+                    <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                        Name is required
+                    </div>
                 </div>
-            </div>
-            <button type="submit" class="btn btn-success" [disabled]="!updateForm.form.valid">Update</button>   
-        </form>
-    </div>
+                <button type="submit" class="btn btn-success" [disabled]="!updateForm.form.valid && !continue">Update</button>   
+            </form>
+        </div>
+    </ng-template>
   </div>
     
-    
-    
-<!-- <accordion>
-
-    
-    <accordion-group *ngFor="let shelve of allshelves" heading="{{shelve.name}}">
-      <ul>
-        <li *ngFor="let book of shelve.books">
-          {{book.name}}
-        </li>
-      </ul>
-    </accordion-group>
-    <br>
-  </accordion> -->
-
-
-  

@@ -18,42 +18,26 @@ export class AuthService {
     
     }
 
-    role(){
-        
+    role() {
         return localStorage.getItem('user_role');
-        
     }
 
-    login(user){
+    login(user) {
+        
         this.restangular.all('login').post(user).subscribe(res => {
             localStorage.setItem('user_name',res.name);
             localStorage.setItem('user_role',res.role_id);
             localStorage.setItem('user_id',res.id);
-            this.router.navigate(['/shelves']);
+            this.router.navigate(['/books']);
         }, error => {
             console.log(error);
             this.toastr.error('User credentials invalid!');
         });
     }
-    logout(){
-        localStorage.removeItem('user_role');
-        localStorage.removeItem('user_name');
-        localStorage.removeItem('user_id');
+
+    logout() {
+        localStorage.clear();
         this.router.navigate(['/logout']);
     }
-//     isLoggedIn = false;
 
-//   // store the URL so we can redirect after logging in
-//     redirectUrl: string;
-
-//     login(): Observable<boolean> {
-//         return of(true).pipe(
-//         delay(1000),
-//         tap(val => this.isLoggedIn = true)
-//         );
-//     }
-
-//     logout(): void {
-//         this.isLoggedIn = false;
-//     }
 }

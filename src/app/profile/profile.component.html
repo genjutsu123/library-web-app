@@ -1,18 +1,30 @@
-<p>
-  {{user}}
-</p>
+
 <div class="row">
-    
-    <br>
-    <div class="col-lg-8">
-        <ul>
-            <li *ngFor="let book of allbooks" >
-                {{book.name}} | {{book.author.name}} | {{book.genre.name}} | {{book.shelf.name}} | 
-                <button class="btn btn-primary" (click)="returnBook(book)" >Return</button>
-            </li>
-            
-          </ul>
-          
+  <div class="col-lg-10">
+    <h3>BORROWED BOOKS</h3>
+      <table class="table table-hover table-responsive-sm" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Section</th>
+            <th>Stock</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of allbooks" >
+            <td>{{book.name}}</td>
+            <td>{{book.author.name}}</td>
+            <td>{{book.genre.name}}</td>
+            <td>{{book.shelf.name}}</td>
+            <td>{{book.stock}}</td>
+            <td>
+                <button class="btn btn-primary" (click)="returnBook(book)" [disabled]="!continue">Return</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    
 </div>

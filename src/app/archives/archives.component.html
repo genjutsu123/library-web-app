@@ -1,90 +1,136 @@
 
 <div class="row">
-    
-    <br>
-    <div class="col-lg-8">
+    <div class="col-lg-10">
+        <h3>ARCHIVES</h3>
         <div class="accordion" id="accordionExample">
             <div class="card">
                 <div class="card-header" id="headingOne">
-                <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Books
-                    </button>
-                </h5>
+                    <h5 class="mb-0">    
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Books
+                        </button>
+                    </h5>
                 </div>
-            
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                <div class="card-body">
-                    <ul>
-                        <li *ngFor="let book of allbooks" >
-                            {{book.name}} | {{book.author.name}} | {{book.genre.name}} | {{book.shelf.name}} | 
-                            <button class="btn btn-primary" (click)="restoreBook(book)" *ngIf="role == 1">Restore</button>
-                        </li>
-                    </ul>
-                </div>
+                    <div class="card-body">
+                        <table class="table table-responsive-sm" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>                       
+                                    <th>Author</th>                     
+                                    <th>Genre</th>                      
+                                    <th>Section</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let book of allbooks" >
+                                    <td>{{book.name}}</td>
+                                    <td>{{book.author.name}}</td>
+                                    <td>{{book.genre.name}}</td>
+                                    <td>{{book.shelf.name}}</td>
+                                    <td>
+                                        <button class="btn btn-success" (click)="restoreBook(book)" *ngIf="role == 1" [disabled]="!continue"><i class="fas fa-plus"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
             <div class="card">
                 <div class="card-header" id="headingTwo">
-                <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Genres
-                    </button>
-                </h5>
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Genres
+                        </button>
+                    </h5>
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                <div class="card-body">
-                    <ul>
-                        <li *ngFor="let genre of allgenres" >
-                            {{genre.name}}  
-                            <button class="btn btn-primary" (click)="restoreGenre(genre)" *ngIf="role == 1">Restore</button>
-                        </li>
-                    </ul>
-                </div>
+                    <div class="card-body">
+                        <table class="table table-responsive-sm" cellspacing="0" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Books</th>
+                                    <th *ngIf="role == 1">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let genre of allgenres">
+                                    <td>{{genre.name}}</td>
+                                    <td><span *ngFor="let book of genre.books">{{book.name}}, </span></td>
+                                    <td *ngIf="role == 1">
+                                        <button class="btn btn-success" (click)="restoreGenre(genre)" *ngIf="role == 1" [disabled]="!continue"><i class="fas fa-plus"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
             <div class="card">
                 <div class="card-header" id="headingThree">
-                <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Authors
-                    </button>
-                </h5>
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Authors
+                        </button>
+                    </h5>
                 </div>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                <div class="card-body">
-                    <ul>
-                        <li *ngFor="let author of allauthors" >
-                            {{author.name}}  
-                            <button class="btn btn-primary" (click)="restoreAuthor(author)" *ngIf="role == 1">Restore</button>
-                        </li>
-                    </ul>
-                </div>
+                    <div class="card-body">
+                        <table class="table table-responsive-sm" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Books</th>
+                                    <th *ngIf="role == 1">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let author of allauthors">
+                                    <td>{{author.name}}</td>
+                                    <td><span *ngFor="let book of author.books">{{book.name}}, </span></td>
+                                    <td *ngIf="role == 1">
+                                        <button class="btn btn-success" (click)="restoreAuthor(author)" *ngIf="role == 1" [disabled]="!continue"><i class="fas fa-plus"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
             <div class="card">
                 <div class="card-header" id="headingFour">
-                <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
-                        Shelves
-                    </button>
-                </h5>
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                            Shelves
+                        </button>
+                    </h5>
                 </div>
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                <div class="card-body">
-                    <ul>
-                        <li *ngFor="let shelve of allshelves" >
-                            {{shelve.name}}  
-                            <button class="btn btn-primary" (click)="restoreShelve(shelve)" *ngIf="role == 1">Restore</button>
-                        </li>
-                    </ul>
-                </div>
+                    <div class="card-body">
+                        <table class="table table-responsive-sm" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Books</th>
+                                    <th *ngIf="role == 1">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let shelve of allshelves">
+                                    <td>{{shelve.name}}</td>
+                                    <td><span *ngFor="let book of shelve.books">{{book.name}}, </span></td>
+                                    <td *ngIf="role == 1">
+                                        <button class="btn btn-success" (click)="restoreShelve(shelve)" *ngIf="role == 1" [disabled]="!continue"><i class="fas fa-plus"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

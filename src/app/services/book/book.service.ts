@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Restangular } from 'ngx-restangular';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../auth/auth.service';
-
-
+import { Book } from '../../models/Book.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +10,15 @@ import { AuthService } from '../auth/auth.service';
 export class BookService {
 
   constructor( private restangular: Restangular, private toastr: ToastrService, private authService: AuthService) { }
-  book:any;
+  book:Book;
   role;
   getBooks(){
-    // if(localStorage.getItem('user_role') == "1"){
-    //   return this.restangular.all('booklibrarian').getList();
-    // }else{
-    //   return this.restangular.all('books').getList();
-    // }
-    return this.restangular.all('books').getList();
+    if(localStorage.getItem('user_role') == "1"){
+      return this.restangular.all('booklibrarian').getList();
+    }else{
+      return this.restangular.all('books').getList();
+    }
+    // return this.restangular.all('books').getList();
   }
   store(book) {
     

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
-import { AccordionModule, BsDropdownModule, TypeaheadModule } from 'ngx-bootstrap';
+import { AccordionModule, BsDropdownModule, TypeaheadModule, ModalModule } from 'ngx-bootstrap';
 import { RestangularModule} from 'ngx-restangular';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
@@ -39,7 +39,7 @@ export function RestangularConfigFactory (RestangularProvider) {
     SigninComponent,
     SignoutComponent,
     ProfileComponent,
-    ArchivesComponent
+    ArchivesComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +51,7 @@ export function RestangularConfigFactory (RestangularProvider) {
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    ModalModule.forRoot(),
 
   ],
   providers: [AuthGuard,AuthService,CheckLogin],
