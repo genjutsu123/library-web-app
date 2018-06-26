@@ -10,7 +10,6 @@ import 'datatables.net-bs4';
 import 'datatables.net-buttons-bs4';
 import 'datatables.net-responsive-bs4';
 import { Genre } from '../models/Genre.model';
-import { NewGenre } from '../models/NewGenre.mode';
 @Component({
   selector: 'app-genres',
   templateUrl: './genres.component.html',
@@ -23,7 +22,7 @@ export class GenresComponent implements OnInit {
   dataTable: any;
   selectedgenre:Genre;
   allgenres;
-  genre:NewGenre;
+  genre:Genre;
   updategenre:Genre;
   constructor(private genreService: GenreService,
               private toastr: ToastrService,
@@ -103,6 +102,10 @@ export class GenresComponent implements OnInit {
   deleteGenre(data){
     this.continue = false;
     this.restangular.one('genres',data.id).remove().subscribe(res => {
+      
+    }, error => {
+
+    }, ()=>{
       this.allgenres.splice(this.allgenres.indexOf(data),1);
       this.toastr.success('Genre successfully deleted!');
       this.continue = true;

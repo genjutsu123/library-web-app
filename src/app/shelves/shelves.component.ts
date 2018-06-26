@@ -109,6 +109,10 @@ export class ShelvesComponent implements OnInit {
   deleteShelve(data){
     this.continue = false;
     this.restangular.one('shelves',data.id).remove().subscribe(res => {
+      
+    }, error => {
+
+    }, ()=>{
       this.allshelves.splice(this.allshelves.indexOf(data),1);
       this.toastr.success('Shelve successfully deleted!');
       this.continue = true;

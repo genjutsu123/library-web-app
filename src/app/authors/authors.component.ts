@@ -117,11 +117,12 @@ export class AuthorsComponent implements OnInit {
 deleteAuthor(data){
   this.continue = false;
   this.restangular.one('authors',data.id).remove().subscribe(res => {
-    this.allauthors.splice(this.allauthors.indexOf(data),1);
-    this.toastr.success('Author successfully deleted!');
+    
   }, error => {
 
   }, () =>{
+    this.allauthors.splice(this.allauthors.indexOf(data),1);
+    this.toastr.success('Author successfully deleted!');
     this.continue = true;
   });
 }

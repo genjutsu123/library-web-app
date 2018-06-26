@@ -78,12 +78,13 @@ export class ArchivesComponent implements OnInit {
       id: author.id
     };
     this.restangular.all('authorrestore').post(data).subscribe(res => {
-      this.allauthors.splice(this.allauthors.indexOf(author),1);
-      this.toastr.success('Author Successfully Restored!');
+      
       this.spawnTable();
     }, error => {
       
     }, () => {
+      this.allauthors.splice(this.allauthors.indexOf(author),1);
+      this.toastr.success('Author Successfully Restored!');
       this.continue = true;
     });
   }
@@ -94,12 +95,13 @@ export class ArchivesComponent implements OnInit {
       id: book.id
     };
     this.restangular.all('bookrestore').post(data).subscribe(res => {
-      this.allbooks.splice(this.allbooks.indexOf(book),1);
-      this.toastr.success('Book Successfully Restored!');
+      
       this.spawnTable();
     }, error => {
       
     }, () => {
+      this.allbooks.splice(this.allbooks.indexOf(book),1);
+      this.toastr.success('Book Successfully Restored!');
       this.continue = true;
     });
   }
@@ -110,12 +112,13 @@ export class ArchivesComponent implements OnInit {
       id: genre.id
     };
     this.restangular.all('genrerestore').post(data).subscribe(res => {
-      this.allgenres.splice(this.allgenres.indexOf(genre),1);
-      this.toastr.success('Genre Successfully Restored!');
+      
       this.spawnTable();
     }, error => {
       
     }, () => {
+      this.allgenres.splice(this.allgenres.indexOf(genre),1);
+      this.toastr.success('Genre Successfully Restored!');
       this.continue = true;
     });
   }
@@ -126,12 +129,13 @@ export class ArchivesComponent implements OnInit {
       id: shelve.id
     };
     this.restangular.all('shelverestore').post(data).subscribe(res => {
-      this.allshelves.splice(this.allshelves.indexOf(shelve),1);
-      this.toastr.success('Shelve Successfully Restored!');
+      
       this.spawnTable();
     }, error => {
       
     }, () => {
+      this.allshelves.splice(this.allshelves.indexOf(shelve),1);
+      this.toastr.success('Shelve Successfully Restored!');
       this.continue = true;
     });
   }

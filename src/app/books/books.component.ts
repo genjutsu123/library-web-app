@@ -169,12 +169,12 @@ export class BooksComponent implements OnInit {
   deleteBook(book) {
     this.continue = false;
     this.restangular.one('books',book.id).remove().subscribe(res => {
-      this.allbooks.splice(this.allbooks.indexOf(book),1);
-      this.toastr.success('Book successfully deleted!');
-
+      
     }, () =>{
       this.continue = true;
     }, () =>{
+      this.allbooks.splice(this.allbooks.indexOf(book),1);
+      this.toastr.success('Book successfully deleted!');
       this.continue = true;
     }); 
   }
