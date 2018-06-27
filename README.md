@@ -8,6 +8,6 @@
 
 4. Open terminal in the root folder and install dependencies 'npm install'
 
-Launch angular 'ng s --o'
+5. Launch angular 'ng s --o'
 
 
