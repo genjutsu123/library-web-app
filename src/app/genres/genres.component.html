@@ -1,6 +1,15 @@
 <div class="row">
-    <div class="col-lg-10">
-        <h3>GENRES<button type="button" class="btn btn-primary" (click)="openModal(create)" *ngIf="role == 1"><i class="fas fa-plus"></i></button></h3>
+    <div class="col">
+        <h3>GENRES</h3>
+    </div>
+    <div class="col text-right">
+        <button type="button" class="btn btn-primary " (click)="openModal(create)" *ngIf="role == 1">
+            ADD GENRE
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
         <table class="table table-responsive-sm" cellspacing="0">
             <thead>
                 <tr>
@@ -14,8 +23,8 @@
                     <td>{{genre.name}}</td>
                     <td><span *ngFor="let book of genre.books">{{book.name}}, </span></td>
                     <td *ngIf="role == 1">
-                            <button class="btn btn-success" (click)="selectGenre(genre)" (click)="openModal(update)"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-danger" (click)="deleteGenre(genre)" [disabled]="!continue"><i class="far fa-trash-alt"></i></button>      
+                            <button class="btn btn-primary" (click)="selectGenre(genre)" (click)="openModal(update)"><i class="fas fa-edit"></i></button> | 
+                            <button class="btn btn-danger" (click)="deleteGenre(genre)" [disabled]="!continue"><i class="far fa-trash-alt"></i></button>      
                     </td>
                 </tr>
             </tbody>
@@ -23,7 +32,7 @@
     </div>
     <ng-template #create>
         <div class="modal-header">
-            <h4 class="modal-title pull-left">ADD GENRE</h4>
+            <h4 class="modal-title pull-left">GENRE ADD</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -37,13 +46,13 @@
                         Name is required
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success" [disabled]="!genreForm.form.valid && !continue">Add</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!genreForm.form.valid && !continue">Add</button>
             </form>
         </div>
     </ng-template>
     <ng-template #update>
         <div class="modal-header">
-            <h4 class="modal-title pull-left">UPDATE GENRE</h4>
+            <h4 class="modal-title pull-left">GENRE UPDATE</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -57,7 +66,7 @@
                         Name is required
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success" [disabled]="!updateForm.form.valid && !continue">Update</button>    
+                <button type="submit" class="btn btn-primary" [disabled]="!updateForm.form.valid && !continue">Update</button>    
             </form>
         </div>
     </ng-template>

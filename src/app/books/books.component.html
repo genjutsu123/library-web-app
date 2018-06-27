@@ -1,6 +1,13 @@
 <div class="row">
-    <div class="col-lg-10">
-        <h3>BOOKS<button type="button" class="btn btn-primary" (click)="openModal(create)" *ngIf="role == 1"><i class="fas fa-plus"></i></button></h3>
+    <div class="col">
+        <h3>BOOKS</h3>
+    </div>
+    <div class="col text-right">
+        <button type="button" class="btn btn-primary" (click)="openModal(create)" *ngIf="role == 1">ADD BOOK</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
         <table class="table table-responsive-sm" cellspacing="0">
             <thead>
                 <tr>
@@ -19,10 +26,12 @@
                     <td>{{book.genre.name}}</td>
                     <td>{{book.shelf.name}}</td>
                     <td>{{book.stock}}</td>
-                    <td>
-                        <button type="button" class="btn btn-success" (click)="openModal(update)" (click)="selectBook(book)" *ngIf="role == 1"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-danger" (click)="deleteBook(book)" *ngIf="role == 1" [disabled]="!continue"><i class="far fa-trash-alt"></i></button>
-                        <button class="btn btn-primary" (click)="borrowBook(book)" *ngIf="role == 2 && book.stock > 0" [disabled]="!continue"><i class="far fa-hand-rock"></i></button>
+                    <td *ngIf="role == 2 ">
+                        <button class="btn btn-primary" (click)="borrowBook(book)" *ngIf="book.stock > 0" [disabled]="!continue"><i class="far fa-hand-rock"></i></button>
+                    </td>
+                    <td *ngIf="role == 1 ">
+                        <button type="button" class="btn btn-primary" (click)="openModal(update)" (click)="selectBook(book)" ><i class="fas fa-edit"></i></button> | 
+                        <button class="btn btn-danger" (click)="deleteBook(book)" [disabled]="!continue"><i class="far fa-trash-alt"></i></button>
                     </td>
                 </tr>
             </tbody>
@@ -30,7 +39,7 @@
     </div>
     <ng-template #create>
         <div class="modal-header">
-            <h4 class="modal-title pull-left">ADD BOOK</h4>
+            <h4 class="modal-title pull-left">BOOK ADD</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -78,14 +87,14 @@
                         Stock is required
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid && !continue">Add</button>   
+                <button type="submit" class="btn btn-primary" [disabled]="!bookForm.form.valid && !continue">Add</button>   
             </form>
         </div>
     </ng-template>
 
     <ng-template #update>
         <div class="modal-header">
-            <h4 class="modal-title pull-left">Modal</h4>
+            <h4 class="modal-title pull-left">BOOK UPDATE</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -133,7 +142,7 @@
                         Stock is required
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success" [disabled]="!updateForm.form.valid && !continue">Update</button>   
+                <button type="submit" class="btn btn-primary" [disabled]="!updateForm.form.valid && !continue">Update</button>   
             </form>
         </div>
     </ng-template>

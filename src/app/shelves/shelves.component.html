@@ -1,6 +1,13 @@
 <div class="row">
-    <div class="col-lg-10">
-        <h3>SHELVES<button type="button" class="btn btn-primary" (click)="openModal(create)" *ngIf="role == 1"><i class="fas fa-plus"></i></button></h3>
+    <div class="col">
+        <h3>SHELVES</h3>
+    </div>
+    <div class="col text-right">
+        <button type="button" class="btn btn-primary" (click)="openModal(create)" *ngIf="role == 1">ADD SHELVE</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
         <table class="table table-responsive-sm" cellspacing="0">
             <thead>
                 <tr>
@@ -14,7 +21,7 @@
                     <td>{{shelve.name}}</td>
                     <td><span *ngFor="let book of shelve.books">{{book.name}}, </span></td>
                     <td *ngIf="role == 1">
-                        <button class="btn btn-success" (click)="selectShelve(shelve)" (click)="openModal(update)"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-primary" (click)="selectShelve(shelve)" (click)="openModal(update)"><i class="fas fa-edit"></i></button> | 
                         <button class="btn btn-danger" (click)="deleteShelve(shelve)" [disabled]="!continue"><i class="far fa-trash-alt"></i></button>
                     </td>
                 </tr>
@@ -23,7 +30,7 @@
     </div>
     <ng-template #create>
         <div class="modal-header">
-            <h4 class="modal-title pull-left">ADD SHELVE</h4>
+            <h4 class="modal-title pull-left">SHELVE ADD</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -37,13 +44,13 @@
                         Name is required
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success" [disabled]="!shelveForm.form.valid && !continue">Add</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!shelveForm.form.valid && !continue">Add</button>
             </form>
         </div>
     </ng-template>
     <ng-template #update>
         <div class="modal-header">
-            <h4 class="modal-title pull-left">UPDATE SHELVE</h4>
+            <h4 class="modal-title pull-left">SHELVE UPDATE</h4>
             <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -57,7 +64,7 @@
                         Name is required
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success" [disabled]="!updateForm.form.valid && !continue">Update</button>   
+                <button type="submit" class="btn btn-primary" [disabled]="!updateForm.form.valid && !continue">Update</button>   
             </form>
         </div>
     </ng-template>
