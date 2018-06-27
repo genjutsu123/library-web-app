@@ -1,4 +1,4 @@
-## SETUP Rio's-library
+## SETUP Rio's-Library
 
 1. Navigate to htdocs directory if you are using xampp or mampp
 
