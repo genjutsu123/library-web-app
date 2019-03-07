@@ -10,4 +10,4 @@
 
 5. Launch angular 'ng s --o'
 
-
+6. Enable CORS everywhere.
